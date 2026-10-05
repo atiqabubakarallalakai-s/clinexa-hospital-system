@@ -1,0 +1,21 @@
+# CLINEXA AI Development Rules
+
+## 1. Architecture & Next.js App Router
+- Use the Next.js App Router (`app/` directory) exclusively.
+- Default to **Server Components** for data fetching. Use **Client Components** (`'use client'`) only when interactivity or hooks (`useState`, `useEffect`) are strictly necessary.
+- Handle data mutations using Next.js Server Actions with runtime validation via Zod.
+
+## 2. TypeScript & Type Safety
+- **Strict Mode:** Never use `any`. Always define explicit types or interfaces.
+- Leverage Prisma's generated types instead of redundant manual interfaces.
+- Explicitly handle potential null/undefined returns from database queries.
+
+## 3. Database & Prisma ORM
+- Keep `schema.prisma` clean and properly indexed with clear relation names.
+- Avoid N+1 queries by using Prisma's `include` and `select` parameters efficiently.
+- Run migrations via Prisma safely; never write raw SQL unless necessary.
+
+## 4. Security & Error Handling
+- Never expose database connection strings or secrets on the client side.
+- Implement error boundaries (`error.tsx`) to handle runtime exceptions gracefully.
+- Validate user sessions and permissions at the start of every Server Action.
